@@ -105,3 +105,100 @@ int main() {
 
     return 0;
 }
+#include <stdio.h>
+
+// ======================================================
+// 🧠 DESAFIO XADREZ - NÍVEL MESTRE
+// Peças: Torre, Bispo, Rainha e Cavalo
+// Técnicas: Recursividade e Loops Aninhados
+// ======================================================
+
+
+// ==========================
+// 🏰 TORRE (Recursividade)
+// ==========================
+void moverTorre(int passo, int limite) {
+    // Caso base: parou quando alcança o limite
+    if (passo > limite) return;
+
+    printf("Direita (%d)\n", passo);
+
+    // Chamada recursiva: avança uma casa à direita
+    moverTorre(passo + 1, limite);
+}
+
+
+// ==========================
+// ⛪ BISPO (Recursividade + Loops Aninhados)
+// ==========================
+void moverBispo(int linha, int limite) {
+    if (linha > limite) return;
+
+    // loop aninhado: um controle vertical e outro horizontal
+    for (int coluna = 1; coluna <= linha; coluna++) {
+        printf("Cima, Direita (passo %d-%d)\n", linha, coluna);
+    }
+
+    moverBispo(linha + 1, limite); // chamada recursiva
+}
+
+
+// ==========================
+// 👑 RAINHA (Recursividade)
+// ==========================
+void moverRainha(int passo, int limite) {
+    if (passo > limite) return;
+
+    printf("Esquerda (%d)\n", passo);
+
+    moverRainha(passo + 1, limite); // chamada recursiva
+}
+
+
+// ==========================
+// ♞ CAVALO (Loops complexos)
+// Movimento: 2 casas para cima e 1 para a direita
+// ==========================
+void moverCavalo() {
+    printf("Movimento do Cavalo:\n");
+
+    int movCima = 2;
+    int movDireita = 1;
+
+    // loop externo: sobe 2 vezes
+    for (int i = 1, j = movCima; i <= movCima && j > 0; i++, j--) {
+        printf("Cima (%d)\n", i);
+
+        // loop interno com condição extra
+        int k = 0;
+        while (k < movDireita) {
+            if (i == movCima) { // só move para a direita ao final do movimento vertical
+                printf("Direita (1)\n");
+                break; // encerra quando completa o "L"
+            }
+            k++;
+            continue;
+        }
+    }
+}
+
+
+// ==========================
+// 🚀 FUNÇÃO PRINCIPAL
+// ==========================
+int main() {
+    printf("=== Movimento da Torre ===\n");
+    moverTorre(1, 5);
+
+    printf("\n=== Movimento do Bispo ===\n");
+    moverBispo(1, 5);
+
+    printf("\n=== Movimento da Rainha ===\n");
+    moverRainha(1, 8);
+
+    printf("\n=== Movimento do Cavalo ===\n");
+    moverCavalo();
+
+    printf("\nFim da simulação de movimentos!\n");
+    return 0;
+}
